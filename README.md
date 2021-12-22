@@ -45,6 +45,9 @@ For explanation of the `docker run` arguments used above, see:
 - [jacobalberty/unifi-docker # Run as non-root User](
   https://github.com/jacobalberty/unifi-docker#run-as-non-root-user)
 
+📝 **TODO:** Research the warning `Your kernel does not support memory limit capabilities or
+the cgroup is not mounted. Limitation discarded.`
+
 ## Building the image
 
 The base image was changed to `navikey/raspbian-buster`, so that it is possible to run the build
