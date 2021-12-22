@@ -48,7 +48,26 @@ provide some advice for running it on low-memory devices.
 
 ## Building the image
 
-TODO
+The base image was changed to `navikey/raspbian-buster`, so that it is possible to run the build
+on Raspberry Pi Zero.
+
+```shell
+# set up Docker
+curl -fsSL https://get.docker.com -o docker.sh
+sh docker.sh
+sudo usermod -aG docker pi
+
+# set up the Buildx plugin
+curl -L "https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-arm-v6" > ~/.docker/cli-plugins/docker-buildx
+chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+# clone the repository
+git clone https://github.com/chopeen/unifi-docker-raspi.git
+cd unifi-docker-raspi/
+
+# build the image
+docker buildx build --platform linux/arm/v6 -t chopeen/unifi-docker-raspi:latest .
+```
 
 ---
 
