@@ -78,6 +78,11 @@ docker push $UNIFI_REPOSITORY:latest
 docker push $UNIFI_REPOSITORY:$UNIFI_VERSION
 ```
 
+Running the build on Pi takes about an hour, so be patient.
+
+📝 TODO: Research how to perform this build on Ubuntu ([Getting started with Docker for Arm on
+         Linux](https://www.docker.com/blog/getting-started-with-docker-for-arm-on-linux/))
+
 ## Background
 
 When I tried to use the original `jacobalberty/unifi-docker` image from [Docker Hub](
