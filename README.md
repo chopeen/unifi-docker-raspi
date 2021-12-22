@@ -69,6 +69,10 @@ cd unifi-docker-raspi/
 docker buildx build --platform linux/arm/v6 -t chopeen/unifi-docker-raspi:latest .
 ```
 
+## Starting the container
+
+TODO
+
 ---
 
 [original README below]
