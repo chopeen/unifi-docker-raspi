@@ -59,6 +59,7 @@ sh docker.sh
 sudo usermod -aG docker pi
 
 # set up the Buildx plugin
+mkdir ~/.docker/cli-plugins/
 curl -L "https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-arm-v6" > ~/.docker/cli-plugins/docker-buildx
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
@@ -66,8 +67,17 @@ chmod a+x ~/.docker/cli-plugins/docker-buildx
 git clone https://github.com/chopeen/unifi-docker-raspi.git
 cd unifi-docker-raspi/
 
-# build the image
-docker buildx build --platform linux/arm/v6 -t chopeen/unifi-docker-raspi:latest .
+# build the image for appropriate platform
+export UNIFI_REPOSITORY=chopeen/unifi-docker-raspi
+docker buildx build --platform linux/arm/v6 -t $UNIFI_REPOSITORY:latest .
+
+# tag the image with Controller version number
+export UNIFI_VERSION=6.5.55
+docker image tag $UNIFI_REPOSITORY:latest $UNIFI_REPOSITORY:$UNIFI_VERSION
+
+# publish the image to Docker Hub
+docker push $UNIFI_REPOSITORY:latest
+docker push $UNIFI_REPOSITORY:$UNIFI_VERSION
 ```
 
 ## Starting the container
