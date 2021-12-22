@@ -4,7 +4,10 @@ Docker image to run UniFi Controller (aka UniFi Network Application) on Raspberr
 Pi Zero.
 
 You can pull the image from [Docker Hub](https://hub.docker.com/r/chopeen/unifi-docker-raspi):
+
+```shell
 `docker pull chopeen/unifi-docker-raspi:latest`
+```
 
 This repository is a fork of [jacobalberty/unifi-docker](
 https://github.com/jacobalberty/unifi-docker), with some additional ideas taken from
