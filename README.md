@@ -21,6 +21,9 @@ Nichols](https://tynick.com/blog/09-08-2019/unifi-controller-with-raspberry-pi-a
 export UNIFI_DIR=~/unifi/
 mkdir $UNIFI_DIR
 
+# set the directory to be owned by "unifi" user
+sudo chown -R 999:999 $UNIFI_DIR
+
 # start the container
 docker run \
   -d \
