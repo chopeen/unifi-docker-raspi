@@ -1,4 +1,45 @@
-# unifi-docker
+# Running UniFi Controller on Raspberry Pi Zero
+
+Docker image to run UniFi Controller (recently renamed to UniFi Network Application) on Raspberry
+Pi Zero.
+
+You can pull the image from [Docker Hub](TODO): `docker pull TODO`
+
+This repository is a fork of [jacobalberty/unifi-docker](
+https://github.com/jacobalberty/unifi-docker), with some additional ideas taken from
+[jcberthon/unifi-docker](https://github.com/jcberthon/unifi-docker) and a [blog post by Tyson
+Nichols](https://tynick.com/blog/09-08-2019/unifi-controller-with-raspberry-pi-and-docker/).
+
+## Problem statement
+
+When you try to use the original `jacobalberty/unifi-docker` image from [Docker Hub](
+https://hub.docker.com/r/jacobalberty/unifi) on Raspberry Pi Zero, it will fail with error:
+
+```text
+The requested image's platform (linux/arm/v7) does not match the detected host platform (linux/arm/v6) and no specific platform was requested
+```
+
+The supported platforms are: `linux/amd64`, `linux/arm/v7` and `linux/arm64`.
+
+I tried building the image directly on Raspberry Pi, using the original `Dockerfile` with 
+`--platform linux/arm/v6`, but got error:
+
+```text
+failed to solve with frontend dockerfile.v0: failed to create LLB definition: no match for platform in manifest
+```
+
+### Goal
+
+The goal is to publish a Docker image with UniFi Controller for Raspberry Pi Zero as well as
+provide some advice for running it on low-memory devices.
+
+## Building the image
+
+TODO
+
+---
+
+[original README below]
 
 ## Important log4shell News
 
