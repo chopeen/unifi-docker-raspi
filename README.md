@@ -10,10 +10,10 @@ https://github.com/jacobalberty/unifi-docker), with some additional ideas taken 
 [jcberthon/unifi-docker](https://github.com/jcberthon/unifi-docker) and a [blog post by Tyson
 Nichols](https://tynick.com/blog/09-08-2019/unifi-controller-with-raspberry-pi-and-docker/).
 
-## Problem statement
+## Background
 
-When you try to use the original `jacobalberty/unifi-docker` image from [Docker Hub](
-https://hub.docker.com/r/jacobalberty/unifi) on Raspberry Pi Zero, it will fail with error:
+When I tried to use the original `jacobalberty/unifi-docker` image from [Docker Hub](
+https://hub.docker.com/r/jacobalberty/unifi) on Raspberry Pi Zero, it failed with error:
 
 ```text
 The requested image's platform (linux/arm/v7) does not match the detected host platform (linux/arm/v6) and no specific platform was requested
@@ -21,11 +21,24 @@ The requested image's platform (linux/arm/v7) does not match the detected host p
 
 The supported platforms are: `linux/amd64`, `linux/arm/v7` and `linux/arm64`.
 
-I tried building the image directly on Raspberry Pi, using the original `Dockerfile` with 
-`--platform linux/arm/v6`, but got error:
+I tried building a new image from the original `Dockerfile` with `--platform linux/arm/v6`,
+but - depending on the machine (Ubuntu laptop or Raspberry Pi) - it failed with different errors:
 
-```text
-failed to solve with frontend dockerfile.v0: failed to create LLB definition: no match for platform in manifest
+```shell
+ => ERROR [internal] load metadata for docker.io/library/ubuntu:18.04                                                                                                  0.3s
+------
+ > [internal] load metadata for docker.io/library/ubuntu:18.04:
+------
+error: failed to solve: failed to solve with frontend dockerfile.v0: failed to create LLB definition: no match for platform in manifest sha256:0fedbd5bd9fb72089c7bbca476949e10593cebed9b1fb9edf5b79dbbacddd7d6: not found
+```
+
+```shell
+ => ERROR [ 2/15] RUN set -eux;  apt-get update;  apt-get install -y gosu;  rm -rf /var/lib/apt/lists/*                                                                0.9s
+------                                                                                                                                                                      
+ > [ 2/15] RUN set -eux;        apt-get update;         apt-get install -y gosu;        rm -rf /var/lib/apt/lists/*:
+#5 0.599 standard_init_linux.go:228: exec user process caused: exec format error
+------
+error: failed to solve: executor failed running [/bin/sh -c set -eux;   apt-get update;         apt-get install -y gosu;        rm -rf /var/lib/apt/lists/*]: exit code: 1
 ```
 
 ### Goal
