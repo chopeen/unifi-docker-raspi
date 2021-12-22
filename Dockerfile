@@ -1,6 +1,6 @@
-FROM ubuntu:18.04
+FROM navikey/raspbian-buster:latest
 
-LABEL maintainer="Jacob Alberty <jacob.alberty@foundigital.com>"
+LABEL maintainer="chopeen"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
