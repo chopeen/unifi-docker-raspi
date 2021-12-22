@@ -72,7 +72,34 @@ docker buildx build --platform linux/arm/v6 -t chopeen/unifi-docker-raspi:latest
 
 ## Starting the container
 
-TODO
+```shell
+# create a directory to persist UniFi data outside the container
+export UNIFI_DIR=~/unifi/
+mkdir $UNIFI_DIR
+
+# start the container
+docker run \
+  -d \
+  --restart=unless-stopped \
+  --init \
+  -p 8080:8080 -p 8443:8443 -p 3478:3478/udp -p 10001:10001/udp \
+  --volume $UNIFI_DIR:/unifi \
+  -e TZ='Europe/Warsaw' \
+  -e JVM_MAX_HEAP_SIZE='512m' \
+  --memory 350m \
+  --user unifi \
+  --name unifi_raspi \
+  chopeen/unifi-docker-raspi:latest
+```
+
+For explanation of the `docker run` arguments used above, see:
+
+- [UniFi Controller With Raspberry Pi And Docker](
+  https://tynick.com/blog/09-08-2019/unifi-controller-with-raspberry-pi-and-docker/)
+- [jcberthon/unifi-docker # Running the container on low-memory devices](
+  https://github.com/jcberthon/unifi-docker/blob/master/README.md#running-the-container-on-low-memory-devices)
+- [jacobalberty/unifi-docker # Run as non-root User](
+  https://github.com/jacobalberty/unifi-docker#run-as-non-root-user)
 
 ---
 
