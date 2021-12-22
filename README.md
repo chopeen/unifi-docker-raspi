@@ -80,6 +80,49 @@ docker push $UNIFI_REPOSITORY:$UNIFI_VERSION
 
 Running the build on Pi takes about an hour, so be patient.
 
+<details>
+  <summary>Expected output</summary>
+  
+```shell
+$ docker buildx build --platform linux/arm/v6 -t chopeen/unifi-docker-raspi:latest .
+[+] Building 3581.6s (19/20)                                                                                                                                                
+[+] Building 3784.3s (20/20) FINISHED                                                                                                                                       
+ => [internal] load build definition from Dockerfile                                                                                                                   3.5s
+ => => transferring dockerfile: 2.76kB                                                                                                                                 1.5s
+ => [internal] load .dockerignore                                                                                                                                      1.8s
+ => => transferring context: 2B                                                                                                                                        0.1s
+ => [internal] load metadata for docker.io/navikey/raspbian-buster:latest                                                                                             14.0s
+ => [internal] load build context                                                                                                                                      2.3s
+ => => transferring context: 16.55kB                                                                                                                                   0.4s
+ => [ 1/15] FROM docker.io/navikey/raspbian-buster:latest@sha256:ae129c1204bdf26713d125c7092ae33f6d6cd597d9bf660952b1ea8bbc3d708d                                    574.7s
+ => => resolve docker.io/navikey/raspbian-buster:latest@sha256:ae129c1204bdf26713d125c7092ae33f6d6cd597d9bf660952b1ea8bbc3d708d                                        3.1s
+ => => sha256:ae129c1204bdf26713d125c7092ae33f6d6cd597d9bf660952b1ea8bbc3d708d 1.41kB / 1.41kB                                                                         0.0s
+ => => sha256:afec9605c25178c20b3c637ec79b948617b2dd90a40cfb458a2c6d3821432e12 528B / 528B                                                                             0.0s
+ => => sha256:f3051d5b3cafd34c223454a25f92c673441de3c0ae7d978835f8f69b6107ddd9 706B / 706B                                                                             0.0s
+ => => sha256:2764edd039a4cf5f888ce940db1021b4f01e2f74ba952d584c6139d7b5f507e6 90.45MB / 90.45MB                                                                     103.0s
+ => => extracting sha256:2764edd039a4cf5f888ce940db1021b4f01e2f74ba952d584c6139d7b5f507e6                                                                            408.7s
+ => [ 2/15] RUN set -eux;  apt-get update;  apt-get install -y gosu;  rm -rf /var/lib/apt/lists/*                                                                    226.9s 
+ => [ 3/15] RUN mkdir -p /usr/unifi      /usr/local/unifi/init.d      /usr/unifi/init.d      /usr/local/docker                                                        24.1s 
+ => [ 4/15] COPY docker-entrypoint.sh /usr/local/bin/                                                                                                                 21.8s 
+ => [ 5/15] COPY docker-healthcheck.sh /usr/local/bin/                                                                                                                19.1s 
+ => [ 6/15] COPY docker-build.sh /usr/local/bin/                                                                                                                      12.7s 
+ => [ 7/15] COPY functions /usr/unifi/functions                                                                                                                       12.2s 
+ => [ 8/15] COPY import_cert /usr/unifi/init.d/                                                                                                                       12.7s
+ => [ 9/15] COPY pre_build /usr/local/docker/pre_build                                                                                                                13.3s
+ => [10/15] RUN chmod +x /usr/local/bin/docker-entrypoint.sh  && chmod +x /usr/unifi/init.d/import_cert  && chmod +x /usr/local/bin/docker-healthcheck.sh  && chmod   24.3s
+ => [11/15] RUN set -ex  && mkdir -p /usr/share/man/man1/  && groupadd -r unifi -g 999  && useradd --no-log-init -r -u 999 -g 999 unifi  && /usr/local/bin/docker-  2335.0s 
+ => [12/15] RUN mkdir -p /unifi && chown unifi:unifi -R /unifi                                                                                                        26.6s 
+ => [13/15] COPY hotfixes /usr/local/unifi/hotfixes                                                                                                                   12.7s 
+ => [14/15] RUN chmod +x /usr/local/unifi/hotfixes/* && run-parts /usr/local/unifi/hotfixes                                                                           49.4s 
+ => [15/15] WORKDIR /unifi                                                                                                                                            11.0s 
+ => exporting to image                                                                                                                                               372.9s 
+ => => exporting layers                                                                                                                                              372.8s
+ => => writing image sha256:475df499fbb7a30cb7b1c7d23d332a391047b9f0c42bc20153164af5aa4e7e4c                                                                           0.1s
+ => => naming to docker.io/chopeen/unifi-docker-raspi:latest  
+```
+
+</details>
+
 📝 TODO: Research how to perform this build on Ubuntu ([Getting started with Docker for Arm on
          Linux](https://www.docker.com/blog/getting-started-with-docker-for-arm-on-linux/))
 
