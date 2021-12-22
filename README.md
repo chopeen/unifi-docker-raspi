@@ -11,6 +11,70 @@ https://github.com/jacobalberty/unifi-docker), with some additional ideas taken 
 [jcberthon/unifi-docker](https://github.com/jcberthon/unifi-docker) and a [blog post by Tyson
 Nichols](https://tynick.com/blog/09-08-2019/unifi-controller-with-raspberry-pi-and-docker/).
 
+## Starting the container
+
+```shell
+# create a directory to persist UniFi data outside the container
+export UNIFI_DIR=~/unifi/
+mkdir $UNIFI_DIR
+
+# start the container
+docker run \
+  -d \
+  --restart=unless-stopped \
+  --init \
+  -p 8080:8080 -p 8443:8443 -p 3478:3478/udp -p 10001:10001/udp \
+  --volume $UNIFI_DIR:/unifi \
+  -e TZ='Europe/Warsaw' \
+  -e JVM_MAX_HEAP_SIZE='512m' \
+  --memory 350m \
+  --user unifi \
+  --name unifi_raspi \
+  chopeen/unifi-docker-raspi:latest
+```
+
+For explanation of the `docker run` arguments used above, see:
+
+- [UniFi Controller With Raspberry Pi And Docker](
+  https://tynick.com/blog/09-08-2019/unifi-controller-with-raspberry-pi-and-docker/)
+- [jcberthon/unifi-docker # Running the container on low-memory devices](
+  https://github.com/jcberthon/unifi-docker/blob/master/README.md#running-the-container-on-low-memory-devices)
+- [jacobalberty/unifi-docker # Run as non-root User](
+  https://github.com/jacobalberty/unifi-docker#run-as-non-root-user)
+
+## Building the image
+
+The base image was changed to `navikey/raspbian-buster`, so that it is possible to run the build
+on Raspberry Pi Zero.
+
+```shell
+# set up Docker
+curl -fsSL https://get.docker.com -o docker.sh
+sh docker.sh
+sudo usermod -aG docker pi
+
+# set up the Buildx plugin
+mkdir ~/.docker/cli-plugins/
+curl -L "https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-arm-v6" > ~/.docker/cli-plugins/docker-buildx
+chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+# clone the repository
+git clone https://github.com/chopeen/unifi-docker-raspi.git
+cd unifi-docker-raspi/
+
+# build the image for appropriate platform
+export UNIFI_REPOSITORY=chopeen/unifi-docker-raspi
+docker buildx build --platform linux/arm/v6 -t $UNIFI_REPOSITORY:latest .
+
+# tag the image with Controller version number
+export UNIFI_VERSION=6.5.55
+docker image tag $UNIFI_REPOSITORY:latest $UNIFI_REPOSITORY:$UNIFI_VERSION
+
+# publish the image to Docker Hub
+docker push $UNIFI_REPOSITORY:latest
+docker push $UNIFI_REPOSITORY:$UNIFI_VERSION
+```
+
 ## Background
 
 When I tried to use the original `jacobalberty/unifi-docker` image from [Docker Hub](
@@ -46,70 +110,6 @@ error: failed to solve: executor failed running [/bin/sh -c set -eux;   apt-get 
 
 The goal is to publish a Docker image with UniFi Controller for Raspberry Pi Zero as well as
 provide some advice for running it on low-memory devices.
-
-## Building the image
-
-The base image was changed to `navikey/raspbian-buster`, so that it is possible to run the build
-on Raspberry Pi Zero.
-
-```shell
-# set up Docker
-curl -fsSL https://get.docker.com -o docker.sh
-sh docker.sh
-sudo usermod -aG docker pi
-
-# set up the Buildx plugin
-mkdir ~/.docker/cli-plugins/
-curl -L "https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-arm-v6" > ~/.docker/cli-plugins/docker-buildx
-chmod a+x ~/.docker/cli-plugins/docker-buildx
-
-# clone the repository
-git clone https://github.com/chopeen/unifi-docker-raspi.git
-cd unifi-docker-raspi/
-
-# build the image for appropriate platform
-export UNIFI_REPOSITORY=chopeen/unifi-docker-raspi
-docker buildx build --platform linux/arm/v6 -t $UNIFI_REPOSITORY:latest .
-
-# tag the image with Controller version number
-export UNIFI_VERSION=6.5.55
-docker image tag $UNIFI_REPOSITORY:latest $UNIFI_REPOSITORY:$UNIFI_VERSION
-
-# publish the image to Docker Hub
-docker push $UNIFI_REPOSITORY:latest
-docker push $UNIFI_REPOSITORY:$UNIFI_VERSION
-```
-
-## Starting the container
-
-```shell
-# create a directory to persist UniFi data outside the container
-export UNIFI_DIR=~/unifi/
-mkdir $UNIFI_DIR
-
-# start the container
-docker run \
-  -d \
-  --restart=unless-stopped \
-  --init \
-  -p 8080:8080 -p 8443:8443 -p 3478:3478/udp -p 10001:10001/udp \
-  --volume $UNIFI_DIR:/unifi \
-  -e TZ='Europe/Warsaw' \
-  -e JVM_MAX_HEAP_SIZE='512m' \
-  --memory 350m \
-  --user unifi \
-  --name unifi_raspi \
-  chopeen/unifi-docker-raspi:latest
-```
-
-For explanation of the `docker run` arguments used above, see:
-
-- [UniFi Controller With Raspberry Pi And Docker](
-  https://tynick.com/blog/09-08-2019/unifi-controller-with-raspberry-pi-and-docker/)
-- [jcberthon/unifi-docker # Running the container on low-memory devices](
-  https://github.com/jcberthon/unifi-docker/blob/master/README.md#running-the-container-on-low-memory-devices)
-- [jacobalberty/unifi-docker # Run as non-root User](
-  https://github.com/jacobalberty/unifi-docker#run-as-non-root-user)
 
 ---
 
