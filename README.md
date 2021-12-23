@@ -51,6 +51,33 @@ For explanation of the `docker run` arguments used above, see:
 📝 **TODO:** Research the warning `Your kernel does not support memory limit capabilities or
 the cgroup is not mounted. Limitation discarded.`
 
+### Supported models
+
+The image was tested with Raspberry Pi Zero W (2017).
+
+<details>
+  <summary>Zero W specs</summary>
+  
+```shell
+$ cat /proc/cpuinfo
+processor       : 0
+model name      : ARMv6-compatible processor rev 7 (v6l)
+BogoMIPS        : 697.95
+Features        : half thumb fastmult vfp edsp java tls 
+CPU implementer : 0x41
+CPU architecture: 7
+CPU variant     : 0x0
+CPU part        : 0xb76
+CPU revision    : 7
+
+Hardware        : BCM2835
+Revision        : 19000c1
+Serial          : 00000000b8d1df6c
+Model           : Raspberry Pi Zero W Rev 1.1
+```
+
+</details>
+
 ## Troubleshooting
 
 ```shell
@@ -99,7 +126,7 @@ docker push ${UNIFI_REPOSITORY}:latest
 docker push ${UNIFI_REPOSITORY}:${UNIFI_VERSION}
 ```
 
-Running the build on Pi takes about an hour, so be patient.
+Running the build on Zero W (2017) takes about an hour, so be patient.
 
 <details>
   <summary>Expected output</summary>
