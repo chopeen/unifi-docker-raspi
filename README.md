@@ -51,6 +51,21 @@ For explanation of the `docker run` arguments used above, see:
 📝 **TODO:** Research the warning `Your kernel does not support memory limit capabilities or
 the cgroup is not mounted. Limitation discarded.`
 
+## Troubleshooting
+
+```shell
+# logs
+less ~/unifi/log/server.log 
+less ~/unifi/log/mongod.log 
+docker logs unifi_raspi
+
+# access the container's shell
+docker exec -it unifi_raspi /bin/bash
+
+# restart the container
+docker restart unifi_raspi
+```
+
 ## Building the image
 
 The base image was changed to `navikey/raspbian-buster`, so that it is possible to run the build
