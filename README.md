@@ -91,8 +91,8 @@ Model           : Raspberry Pi Zero W Rev 1.1
 
 ```shell
 # logs
-less ~/unifi/log/server.log 
-less ~/unifi/log/mongod.log 
+less ~/unifi/log/server.log
+less ~/unifi/log/mongod.log
 docker logs unifi_raspi
 
 # access the container's shell
