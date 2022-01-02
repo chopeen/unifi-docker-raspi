@@ -17,12 +17,21 @@ Nichols](https://tynick.com/blog/09-08-2019/unifi-controller-with-raspberry-pi-a
 ## Starting the container
 
 ```shell
-# create a directory to persist UniFi data outside the container
 export UNIFI_DIR=~/unifi/
+
+# create a directory to persist UniFi data outside the container
 mkdir $UNIFI_DIR
 
 # set the directory to be owned by "unifi" user
 sudo chown -R 999:999 $UNIFI_DIR
+````
+
+```shell
+export UNIFI_DIR=~/unifi/
+
+# (optional) stop the running container and rename it
+docker container stop unifi_raspi
+docker rename unifi_raspi unifi_raspi_old
 
 # start the container
 docker run \
