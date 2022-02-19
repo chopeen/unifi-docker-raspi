@@ -104,8 +104,13 @@ docker restart unifi_raspi
 
 ## Building the image
 
-The base image was changed to `navikey/raspbian-buster`, so that it is possible to run the build
-on Raspberry Pi Zero.
+The base images were changed to:
+
+- `navikey/raspbian-buster`
+- `balenalib/raspberry-pi-golang:1-buster-build` (there is also Zero-specific [orange-pi-zero-golang](
+   https://hub.docker.com/r/balenalib/orange-pi-zero-golang) - would it be better?)
+
+so that it is possible to run the build on Raspberry Pi Zero.
 
 ```shell
 # set up Docker
