@@ -1,4 +1,4 @@
-FROM golang:1.17-bullseye as permset
+FROM balenalib/raspberry-pi-golang:1-buster-build as permset
 WORKDIR /src
 RUN git clone https://github.com/jacobalberty/permset.git /src && \
     mkdir -p /out && \
