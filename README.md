@@ -126,6 +126,11 @@ chmod a+x ~/.docker/cli-plugins/docker-buildx
 # clone the repository
 git clone https://github.com/chopeen/unifi-docker-raspi.git
 cd unifi-docker-raspi/
+```
+
+```shell
+# (optional) log in to Docker Hub, to avoid random errors when pulling base images
+docker login
 
 # build the image for appropriate platform
 export UNIFI_REPOSITORY=chopeen/unifi-docker-raspi
