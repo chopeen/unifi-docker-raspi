@@ -116,6 +116,8 @@ so that it is possible to run the build on Raspberry Pi Zero.
 # set up Docker
 curl -fsSL https://get.docker.com -o docker.sh
 sh docker.sh
+
+# (optional) to run `docker` command without `sudo`; restart the session afterwards
 sudo usermod -aG docker pi
 
 # set up the Buildx plugin
