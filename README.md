@@ -238,7 +238,7 @@ provide some advice for running it on low-memory devices.
 
 ## `latest` tag
 
-`latest` is now tracking unifi 7.0.x as of 2022-02-28.
+`latest` is now tracking unifi 7.1.x as of 2022-05-09.
 
 ## multiarch
 
@@ -259,13 +259,13 @@ You will not be able to bind to lower ports by default. If you also pass the doc
 
 | Tag | Description |
 |-----|-------------|
-| [`latest`, `v7`, `v7.0`](https://github.com/jacobalberty/unifi-docker/blob/master/Dockerfile) | Tracks UniFi stable version - 7.0.25 as of 2021-03-30 [Change Log 7.0.25](https://community.ui.com/releases/UniFi-Network-Application-7-0-25/3344c362-7da5-4ecd-a403-3b47520e3c01)|
+| [`latest`, `v7`, `v7.1`](https://github.com/jacobalberty/unifi-docker/blob/master/Dockerfile) | Tracks UniFi stable version - 7.1.65 as of 2022-05-09 [Change Log 7.1.65](https://community.ui.com/releases/UniFi-Network-Application-7-1-65/6866da09-c506-42ec-abcf-1b7fcc0dddc7)|
 
 ### Latest Release Candidate tags
 
 | Version | Latest Tag |
 |---------|------------|
-| 7.0.x   | [`7.0.23`](https://github.com/jacobalberty/unifi-docker/blob/7.0.23/Dockerfile) |
+| 7.1.x   | [`7.1.65`](https://github.com/jacobalberty/unifi-docker/blob/7.1.65/Dockerfile) |
 
 These tags generally track the UniFi APT repository. We do lead the repository a little when it comes to pushing the latest version. The latest version gets pushed when it moves from `release candidate` to `stable` instead of waiting for it to hit the repository.
 
@@ -287,7 +287,7 @@ Example to test with
 ```bash
 mkdir -p unifi/data
 mkdir -p unifi/log
-docker run --rm --init -p 8080:8080 -p 8443:8443 -p 3478:3478/udp -e TZ='Africa/Johannesburg' -v ~/unifi:/unifi --name unifi jacobalberty/unifi:v6
+docker run --rm --init -p 8080:8080 -p 8443:8443 -p 3478:3478/udp -e TZ='Africa/Johannesburg' -v ~/unifi:/unifi --name unifi jacobalberty/unifi:v7
 ```
 
 **Note** you must omit `-v ~/unifi:/unifi` on windows, but you can use a local volume e.g. `-v unifi:/unifi` (omit the leading ~/) to persist the data on a local volume.
