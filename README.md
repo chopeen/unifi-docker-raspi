@@ -104,6 +104,12 @@ docker restart unifi_raspi
 
 ## Building the image
 
+🕸️ This instruction is now obsolete.
+
+💡 If you provide your `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` in repository secrets
+and change `DOCKER_IMAGE` value to point a repository in your account, the "Publish Docker image"
+workflow (see `docker.yml`) will publish the image to Docker Hub automatically.
+
 The base images were changed to:
 
 - `navikey/raspbian-buster`
