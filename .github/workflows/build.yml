@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize, reopened]
 
 env:
-  TEST_TAG: jacobalberty/unifi:test
+  TEST_TAG: chopeen/unifi-docker-raspi:test
   PKGURL: https://dl.ui.com/unifi/6.5.55/unifi_sysvinit_all.deb
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=jacobalberty/unifi
+          DOCKER_IMAGE=chopeen/unifi-docker-raspi
           VERSION=noop
           if [ "${{ github.event_name }}" = "schedule" ]; then
             VERSION=nightly
@@ -64,7 +64,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          platforms: linux/arm/v7,linux/arm64/v8,linux/amd64
+          platforms: linux/arm/v6
           push: false
           load: false
           cache-from: type=gha
