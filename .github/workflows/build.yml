@@ -62,6 +62,7 @@ jobs:
           docker logs unifitest
           docker exec -t unifitest ls /var/
           docker exec -t unifitest ls /var/log/
+          docker exec -t unifitest ls /usr/lib/unifi/logs/
           docker stop unifitest
       - name: Build Docker image
         uses: docker/build-push-action@v3

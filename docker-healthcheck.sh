@@ -12,5 +12,6 @@ curl --max-time 5 -kIL --fail https://localhost:${PORT}
 
 ls /var/
 ls /var/log/
+ls /usr/lib/unifi/logs/
 
 exit 1
