@@ -60,9 +60,10 @@ jobs:
           for i in $(seq 1 10); do [ $(docker inspect --format='{{json .State.Health.Status}}' unifitest ) == \"healthy\" ] && echo "Attempt: ${i}" && break ||  sleep 35; done
           docker inspect unifitest
           docker logs unifitest
-          docker exec -t unifitest ls /var/
-          docker exec -t unifitest ls /var/log/
-          docker exec -t unifitest ls /usr/lib/unifi/logs/
+          docker exec -t unifitest ls /var/log/mongodb/
+          docker exec -t unifitest ls /var/log/unifi/
+          docker exec -t unifitest cat /usr/lib/unifi/logs/migration.log
+          docker exec -t unifitest cat /usr/lib/unifi/logs/server.log
           docker stop unifitest
       - name: Build Docker image
         uses: docker/build-push-action@v3
