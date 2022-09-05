@@ -69,6 +69,9 @@ jobs:
           docker exec -t unifitest cat /usr/lib/unifi/logs/migration.log
           echo "*** 5 ***"
           docker exec -t unifitest cat /usr/lib/unifi/logs/server.log
+          echo "*** 6 ***"
+          docker exec -t unifitest ls -al /usr/lib/unifi/data/
+          docker exec -t unifitest ls -al /usr/lib/unifi/data/db/
           docker stop unifitest
       - name: Build Docker image
         uses: docker/build-push-action@v3
