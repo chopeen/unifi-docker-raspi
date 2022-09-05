@@ -9,3 +9,8 @@ PORT=${SYSPROPS_PORT:-8443}
 echo "PORT: ${PORT}"
 
 curl --max-time 5 -kIL --fail https://localhost:${PORT}
+
+ls /var/
+ls /var/log/
+
+exit 1
