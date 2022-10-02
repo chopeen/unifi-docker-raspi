@@ -59,6 +59,27 @@ jobs:
           sleep 35 &&
           for i in $(seq 1 10); do [ $(docker inspect --format='{{json .State.Health.Status}}' unifitest ) == \"healthy\" ] && break ||  sleep 35; done &&
           [ $(docker inspect --format='{{json .State.Health.Status}}' unifitest ) == \"healthy\" ] &&
+          
+          # debug start
+          docker inspect unifitest
+
+          echo "*** 1 ***"
+          docker logs unifitest
+
+          # echo "*** 2 ***"
+          # docker exec -t unifitest ls /var/log/mongodb/
+          # echo "*** 3 ***"
+          # docker exec -t unifitest ls /var/log/unifi/
+          # echo "*** 4 ***"
+          # docker exec -t unifitest cat /usr/lib/unifi/logs/migration.log
+          # echo "*** 5 ***"
+          # docker exec -t unifitest cat /usr/lib/unifi/logs/server.log
+          
+          echo "*** 6 ***"
+          docker exec -t unifitest ls -al /usr/lib/unifi/data/
+          docker exec -t unifitest ls -al /usr/lib/unifi/data/db/
+          # debug end
+
           docker stop unifitest
       - name: Build Docker image
         uses: docker/build-push-action@v3
