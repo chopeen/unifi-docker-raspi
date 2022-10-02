@@ -209,9 +209,15 @@ if [[ "${@}" == "unifi" ]]; then
         for dir in ${DIRS}; do
             if [ "$(stat -c '%u' "${dir}")" != "${UNIFI_UID}" ]; then
                 chown -R "${UNIFI_UID}:${UNIFI_GID}" "${dir}"
+
+                echo "🐛 Check permissions (inside the loop)"
+                ls -al
             fi
         done
         gosu unifi:unifi ${UNIFI_CMD} &
+
+        echo "🐛 Check permissions (outside the loop)"
+        ls -al
     fi
     wait
     log "WARN: unifi service process ended without being signaled? Check for errors in ${LOGDIR}." >&2
