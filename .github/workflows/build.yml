@@ -61,12 +61,12 @@ jobs:
           docker inspect unifitest
           echo "*** 1 ***"
           docker logs unifitest
-          echo "*** 2 ***"
-          docker exec -t unifitest ls /var/log/mongodb/
+          # echo "*** 2 ***"
+          # docker exec -t unifitest ls /var/log/mongodb/
           echo "*** 3 ***"
           docker exec -t unifitest ls /var/log/unifi/
           echo "*** 4 ***"
-          docker exec -t unifitest cat /usr/lib/unifi/logs/migration.log
+          docker exec -t unifitest cat /usr/lib/unifi/logs/mongod.log
           echo "*** 5 ***"
           docker exec -t unifitest cat /usr/lib/unifi/logs/server.log
           echo "*** 6 ***"
