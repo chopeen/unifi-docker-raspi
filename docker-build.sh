@@ -42,6 +42,7 @@ apt-get install -qy --no-install-recommends \
 
 # starting from v7.3, Unifi Controller drops support for Java 8 and requires Java 11
 # https://jjn.one/posts/raspberry-pi-zero-java-11/
+mkdir -p /usr/lib/jvm
 cd /usr/lib/jvm
 wget https://cdn.azul.com/zulu-embedded/bin/zulu11.62.17-ca-jdk11.0.18-linux_aarch32hf.tar.gz
 tar -xzvf zulu11.62.17-ca-jdk11.0.18-linux_aarch32hf.tar.gz
