@@ -1,4 +1,5 @@
 FROM balenalib/raspberry-pi-golang:1-buster-build as permset
+
 WORKDIR /src
 RUN git clone https://github.com/jacobalberty/permset.git /src && \
     mkdir -p /out && \
@@ -10,7 +11,7 @@ LABEL maintainer="chopeen"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG PKGURL=https://dl.ui.com/unifi/7.1.65/unifi_sysvinit_all.deb
+ARG PKGURL=https://dl.ui.com/unifi/7.3.83/unifi_sysvinit_all.deb
 
 ENV BASEDIR=/usr/lib/unifi \
     DATADIR=/unifi/data \

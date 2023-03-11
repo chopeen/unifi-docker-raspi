@@ -36,7 +36,7 @@ apt-get install -qy --no-install-recommends \
     dirmngr \
     gpg \
     gpg-agent \
-    openjdk-8-jre-headless \
+    openjdk-11-jre-headless \
     procps \
     libcap2-bin \
     tzdata
@@ -53,7 +53,7 @@ rm -f ./unifi.deb
 chown -R unifi:unifi /usr/lib/unifi
 rm -rf /var/lib/apt/lists/*
 
-rm -rf ${ODATADIR} ${OLOGDIR} ${ORUNDIR}
+rm -rf ${ODATADIR} ${OLOGDIR} ${ORUNDIR} ${BASEDIR}/data ${BASEDIR}/run ${BASEDIR}/logs
 mkdir -p ${DATADIR} ${LOGDIR} ${RUNDIR}
 ln -s ${DATADIR} ${BASEDIR}/data
 ln -s ${RUNDIR} ${BASEDIR}/run
