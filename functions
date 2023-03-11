@@ -5,13 +5,8 @@ log() {
 }
 
 set_java_home() {
-    JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/jre/bin/java::")
-    if [ ! -d "${JAVA_HOME}" ]; then
-        # For some reason readlink failed so lets just make some assumptions instead
-        # We're assuming openjdk 8 since thats what we install in Dockerfile
-        arch=`dpkg --print-architecture 2>/dev/null`
-        JAVA_HOME=/usr/lib/jvm/java-11-openjdk-${arch}
-    fi
+    # hard-coded path to unpacked Zulu Java
+    JAVA_HOME=/usr/lib/jvm/zulu11.62.17-ca-jdk11.0.18-linux_aarch32hf
 }
 
 instPkg() {
