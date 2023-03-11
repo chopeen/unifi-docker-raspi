@@ -36,10 +36,20 @@ apt-get install -qy --no-install-recommends \
     dirmngr \
     gpg \
     gpg-agent \
-    openjdk-8-jre-headless \
     procps \
     libcap2-bin \
     tzdata
+
+# starting from v7.3, Unifi Controller drops support for Java 8 and requires Java 11
+# https://jjn.one/posts/raspberry-pi-zero-java-11/
+cd /usr/lib/jvm
+wget https://cdn.azul.com/zulu-embedded/bin/zulu11.62.17-ca-jdk11.0.18-linux_aarch32hf.tar.gz
+tar -xzvf zulu11.62.17-ca-jdk11.0.18-linux_aarch32hf.tar.gz
+rm zulu11.62.17-ca-jdk11.0.18-linux_aarch32hf.tar.gz
+update-alternatives --install /usr/bin/java java /usr/lib/jvm/zulu11.62.17-ca-jdk11.0.18-linux_aarch32hf/bin/java 10
+update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/zulu11.62.17-ca-jdk11.0.18-linux_aarch32hf/bin/javac 10
+update-alternatives --config java
+
 echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' | tee /etc/apt/sources.list.d/100-ubnt-unifi.list
 tryfail apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 06E85760C0A52C50
 
