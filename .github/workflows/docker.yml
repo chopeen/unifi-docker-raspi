@@ -60,7 +60,7 @@ jobs:
             type=semver,pattern=v{{major}}.{{minor}}
             type=ref,event=branch
           images: |
-            jacobalberty/unifi
+            chopeen/unifi-docker-raspi
             ghcr.io/${{ github.repository }}
       - name: Build container image
         uses: docker/build-push-action@v4
