@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+echo "Running pre_build/armhf/mongodb.sh"
+
 VER=3.2.22-2
 
 TMP=$(mktemp -d)
