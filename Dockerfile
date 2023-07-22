@@ -10,7 +10,7 @@ LABEL maintainer="chopeen"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG PKGURL=https://dl.ui.com/unifi/7.1.65/unifi_sysvinit_all.deb
+ARG PKGURL=https://dl.ui.com/unifi/7.2.97/unifi_sysvinit_all.deb
 
 ENV BASEDIR=/usr/lib/unifi \
     DATADIR=/unifi/data \
