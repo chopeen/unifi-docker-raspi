@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   mongo:
-    image: mongo:3.6
+    image: mongo:6.0
     container_name: ${COMPOSE_PROJECT_NAME}_mongo
     networks:
       - unifi
