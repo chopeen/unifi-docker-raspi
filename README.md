@@ -1,5 +1,7 @@
 # Running UniFi Controller on Raspberry Pi Zero
 
+🕸 No longer maintained! 🕸
+
 Docker image to run UniFi Controller (aka UniFi Network Application) on Raspberry
 Pi Zero.
 
