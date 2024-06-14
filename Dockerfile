@@ -1,11 +1,11 @@
-FROM balenalib/raspberry-pi-golang:1-buster-build as permset
+FROM balenalib/raspberry-pi-golang:1-bullseye-build as permset
 
 WORKDIR /src
 RUN git clone https://github.com/jacobalberty/permset.git /src && \
     mkdir -p /out && \
     go build -ldflags "-X main.chownDir=/unifi" -o /out/permset
 
-FROM navikey/raspbian-buster:latest
+FROM navikey/raspbian-bullseye:latest
 
 LABEL maintainer="chopeen"
 
