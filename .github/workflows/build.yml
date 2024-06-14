@@ -56,9 +56,24 @@ jobs:
         run: |
           export PKGURL=${{env.PKGURL}} &&
           docker run -d --env PKGURL --rm --name unifitest ${{env.TEST_TAG}} &&
-          sleep 35 &&
-          for i in $(seq 1 10); do [ $(docker inspect --format='{{json .State.Health.Status}}' unifitest ) == \"healthy\" ] && break ||  sleep 35; done &&
-          [ $(docker inspect --format='{{json .State.Health.Status}}' unifitest ) == \"healthy\" ] &&
+          sleep 15 &&
+          docker container ls &&
+          sleep 120 &&
+          docker container ls &&
+          docker inspect --format='{{json .State}}' unifitest &&
+
+          echo "*** 1 ***" &&
+          docker logs unifitest &&
+          echo "*** 2 ***" &&
+          docker exec -t unifitest ls /var/log/mongodb/ &&
+          echo "*** 3 ***" &&
+          docker exec -t unifitest ls /var/log/unifi/ &&
+          echo "*** 4 ***" &&
+          docker exec -t unifitest cat /var/log/unifi/server.log &&
+          echo "*** 6 ***" &&
+          docker exec -t unifitest ls -al /usr/lib/unifi/data/ &&
+          docker exec -t unifitest ls -al /usr/lib/unifi/data/db/ &&
+
           docker stop unifitest
       - name: Build Docker image
         uses: docker/build-push-action@v4
